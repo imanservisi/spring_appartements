@@ -1,9 +1,14 @@
 package com.isabelle.demo.entity;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Residence {
@@ -13,6 +18,10 @@ public class Residence {
     private Long id;
     private String nomResidence;
     private String adresse;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "residence")
+    private List<Lot> lots;
 
     public Residence() {
         super();
@@ -46,6 +55,14 @@ public class Residence {
 
     public void setAdresse(String adresse) {
         this.adresse = adresse;
+    }
+
+    public List<Lot> getLots() {
+        return this.lots;
+    }
+
+    public void setLots(List<Lot> lots) {
+        this.lots = lots;
     }
 
 
