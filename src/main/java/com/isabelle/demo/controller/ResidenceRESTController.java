@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.isabelle.demo.entity.Residence;
 import com.isabelle.demo.service.ResidenceService;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 
 
@@ -48,5 +47,4 @@ public class ResidenceRESTController {
     public void deleteResidence(@PathVariable("id") Long id) {
         residenceService.deleteResidenceById(id);
     }
-    
 }
