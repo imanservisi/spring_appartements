@@ -9,19 +9,23 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.isabelle.demo.entity.Lot;
 import com.isabelle.demo.entity.Residence;
+import com.isabelle.demo.repository.ResidenceRepository;
 import com.isabelle.demo.service.ResidenceService;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-
+import org.springframework.web.bind.annotation.GetMapping;
 
 @RestController
 @RequestMapping("/api")
-@CrossOrigin
+@CrossOrigin(origins = "*")
 public class ResidenceRESTController {
 
     @Autowired
     ResidenceService residenceService;
+
+    @Autowired
+    ResidenceRepository residenceRepository;
     
     @RequestMapping(method=RequestMethod.GET)
     public List<Residence> getAllResidences() {
@@ -46,5 +50,12 @@ public class ResidenceRESTController {
     @RequestMapping(value = "/{id}", method=RequestMethod.DELETE)
     public void deleteResidence(@PathVariable("id") Long id) {
         residenceService.deleteResidenceById(id);
+    }
+
+    @GetMapping("/{id}/lots")
+    public List<Lot> getLotsByResidence(@PathVariable("id") Long id) {
+        Residence residence = residenceRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Résidence non trouvée avec l'id : " + id));
+        return residence.getLots();
     }
 }

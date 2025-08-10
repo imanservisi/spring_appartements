@@ -12,8 +12,8 @@ import com.isabelle.demo.service.LotService;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @RestController
-@RequestMapping("/api/lot")
-@CrossOrigin
+@RequestMapping("/api/lots")
+@CrossOrigin(origins = "*")
 public class LotRESTController {
 
     @Autowired
